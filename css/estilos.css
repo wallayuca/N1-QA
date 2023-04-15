@@ -1,0 +1,59 @@
+* {
+  color: rgb(176, 216, 230);
+  background-color: rgb(64, 64, 64);
+  margin-left: 30px;
+  margin-right: 100px;
+  margin-bottom: 10px;
+}
+
+Body {
+  display: block;
+  margin-left: 0px;
+  margin-right: 10px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+/* Estilos para hacer el formulario responsive */
+.form-container {
+  min-width: 24rem;
+  max-width: 90%;
+  font-size: 100%;
+  text-align: left;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+textarea,
+select {
+  width: 100%;
+  padding: 1%;
+  margin-bottom: 10px;
+  font-size: 100%;
+}
+
+button {
+  padding: 10px;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 785px) {
+  .form-container {
+    min-width: 24rem;
+    max-width: 90%;
+    font-size: 80%;
+    text-align: left;
+  }
+}
+
+#formulario {
+  text-align: end;
+  justify-content: center;
+
+  margin-left: 0px;
+  text-align: center;
+  border: 1px;
+
+  border-color: brown 2px solid;
+}
