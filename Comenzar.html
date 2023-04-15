@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Chrome" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>N1 Taller de Testing y QA</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <script src="./js/functions.js"></script>
+
+    <style></style>
+  </head>
+
+  <body>
+    <div class="form-container">
+      <h1>Ingreso Fichas Medicas</h1>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="50"
+        height="50"
+        viewBox="0 0 100 100">
+        <path
+          d="M50 85.1C25.2 85.1 5 65.2 5 40S25.2 5 50 5s45 19.9 45 45S74.8 85.1 50 85.1z"
+          fill="#6CB2EB" />
+        <path
+          d="M79.2 32.2l-17.1 17.1c-1.4-0.4-2.9-0.6-4.5-0.6-7.2 0-13.4 4.8-15.6 11.4l-20.4-20.4c3.3-8.3 11.7-14.1 21-14.1 1.6 0 3.2 0.2 4.8 0.6l32.8 32.8z"
+          fill="#50A6E9" />
+        <path
+          d="M5 40c0-5.6 1.1-11 3.1-15.9l21.3 21.3c-4.8 2-8.8 5.1-11.9 8.9l-12.5-12.5C6.1 51 5 45.6 5 40z"
+          fill="#8BC1F7" />
+        <path
+          d="M50 94.6c-7.3 0-14.1-1.8-19.9-5l26.6-26.6c2.9 5.8 8.1 10.7 14.5 13.9l-21.2 21.2c-2.9-1.1-5.6-2.8-8-5z"
+          fill="#3A83C3" />
+        <text x="0" y="35" font-family="Marlboro" font-size="20" fill="#D00">
+          CentroMédico
+        </text>
+      </svg>
+      <form id="myForm" action="#" method="post">
+        <label for="run">Run:</label>
+        <input
+          type="text"
+          id="run"
+          name="run"
+          pattern="[0-9\.]+[-]{1}[0-9Kk]{1}"
+          required />
+        <input type="button" value="Validar" onclick="validarRut() " /><br />
+        <input
+          type="button"
+          value="recupera"
+          onclick="recuperarDatosGeoreferenciales" /><br />
+
+        <label for="nombre">Nombres:</label>
+        <input type="text" id="nombre" name="nombre" />
+
+        <label for="apellido">Apellido Paterno:</label>
+        <input type="text" id="apellidoPaterno" name="apellidoPaterno" />
+        <label for="apellidoMaterno">Apellido Materno:</label>
+        <input type="text" id="apellidoMaterno" name="apellidoMaterno" />
+
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" />
+
+        <label for="comuna">Comuna:</label>
+        <select id="CBCity"></select>
+
+        <script>
+          // Obtener el elemento ComboBox de la comuna
+          var comboBox = document.getElementById("CBCity");
+
+          // Cargar datos desde el archivo JSON
+          fetch("./JSON/city.list.json")
+            .then((response) => response.json())
+            .then((data) => {
+              /* var opciones = data; */
+              var opciones = data.filter((city) => city.country === "CL");
+              opciones.sort((a, b) => a.name.localeCompare(b.name));
+              // Agregar opciones al ComboBox
+              for (var i = 0; i < opciones.length; i++) {
+                var opcion = document.createElement("option");
+                opcion.textContent = opciones[i].name;
+                comboBox.appendChild(
+                  opcion
+                ); /*revisar si "CBCity" o "comboBox"   ????    */
+              }
+            })
+            .catch((error) =>
+              console.error("Error al cargar los datos:", error)
+            );
+        </script>
+
+        <label for="ciudad">Ciudad:</label>
+        <input type="text" id="ciudad" name="ciudad" />
+
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" name="telefono" />
+
+        <label for="email">Email:</label>
+        <!-- <input type="email" id="email" name="email" /> -->
+        <input
+          type="email"
+          id="email"
+          name="email"
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+          required />
+
+        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNacimiento" name="fechaNacimiento" />
+
+        <label for="estadoCivil">Estado Civil:</label>
+        <select id="estadoCivil" name="estadoCivil">
+          <option value="casado">Casado</option>
+          <option value="soltero">Soltero</option>
+          <option value="viudo">Viudo</option>
+          <option value="divorciado">Divorciado</option>
+          <option value="conviviente">Conviviente</option>
+        </select>
+
+        <label for="comentarios">Comentarios:</label>
+        <textarea id="comentarios" name="comentarios"></textarea>
+
+        <button type="button" onclick="limpiarFormulario()">Limpiar</button>
+        <!-- Cambiar a SUBMIT EL TIPO DE BOTON-->
+        <button type="submit" onclick="guardarFormulario()">Guardar</button>
+        <button type="button" onclick="cerrarFormulario()">Cerrar</button>
+      </form>
+    </div>
+    <script></script>
+  </body>
+</html>
